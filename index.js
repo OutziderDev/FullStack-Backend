@@ -75,17 +75,23 @@ app.get('/api/persons/:id',(req,res)=>{//REST for  search only 1 person
 app.post('/api/persons',(req,res)=>{//REST FOR POST (SEND INFORMATION)
   const id =  Math.floor(Math.random() * (10000 - 1) +1)
   const body = req.body
+
+  //const duplicate = persons.find(p => p.name === body.name) ? console.log('si esta') : console.log('no esta')
+
   if (!body.name || !body.number) {
     return res.status(404).json({Error:'Fatal error: number or name is missing'})
   }
 
+  if (persons.find(p => p.name === body.name)) {
+    return res.status(409).json({Error: "name must be unique"})
+  }
   const people = {
     id:id,
     name:body.name,
     number:body.number
   }
   persons = persons.concat(people);
-  res.json(persons)
+  res.status(201).json(persons)
 })
 
 // here update
