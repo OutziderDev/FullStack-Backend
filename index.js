@@ -25,7 +25,7 @@ const persons = [
       number: "39-23-6423122"
     },
     { 
-      id: 4,
+      id: 5,
       name: "Mary Cuie", 
       number: "83-43-127023"
     }
@@ -39,6 +39,7 @@ app.get('/',(req,res)=>{
     <div>use.. <br>
      <a href="http://localhost:3001/api/persons">/api/persons</a>      for view all persons </br>
      <a href="http://localhost:3001/info">/info</a> to view total persons in phonebook and more info </br>
+     <a href="http://localhost:3001/api/persons/4">/api/persons/4</a> to selected 1 people to phonebook </br>
     </div>
     `;
     res.send(presentation);
@@ -61,14 +62,20 @@ app.get('/info',(req,res)=>{
 })
 
 //API REST
-app.get('/api/persons',(req,res)=>{
+app.get('/api/persons',(req,res)=>{ //Selecciona todo
   res.json(persons)
 })
 
-app.post('/api/persons',(req,res)=>{
+app.get('/api/persons/:id',(req,res)=>{//REST for  search only 1 person
+  const id = Number(req.params.id)
+  const people = persons.find(p => p.id === id)
+  people ? res.json(people) : res.status(404).json({Error:'People Mising'}) 
+}) 
+
+app.post('/api/persons',(req,res)=>{//REST FOR POST (SEND INFORMATION)
   res.send('Hola')
 })
 
 app.listen(PORT,()=>{
-    console.log(`Server running on port ${PORT} for exit pres CTRL + C` );
+    console.log(`Server running on port ${PORT} for exit pres CTRL + C` )
 })
