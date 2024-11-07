@@ -1,9 +1,8 @@
 const express = require('express');
 const app = express();
 const PORT = 3001;
-app.use(express.json());
 
-const persons = [
+let persons = [
     { 
       id: 1,
       name: "Arto Hellas", 
@@ -74,6 +73,15 @@ app.get('/api/persons/:id',(req,res)=>{//REST for  search only 1 person
 
 app.post('/api/persons',(req,res)=>{//REST FOR POST (SEND INFORMATION)
   res.send('Hola')
+})
+
+// here update
+
+app.use(express.json());
+app.delete(`/api/persons/:id`,(req,res)=>{
+  const id = Number(req.params.id);
+  persons = persons.filter(people => people.id !== id)
+  res.status(204).end()
 })
 
 app.listen(PORT,()=>{
