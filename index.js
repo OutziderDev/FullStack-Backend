@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const PORT = 3001;
+app.use(express.json());
 
 let persons = [
     { 
@@ -72,16 +73,27 @@ app.get('/api/persons/:id',(req,res)=>{//REST for  search only 1 person
 }) 
 
 app.post('/api/persons',(req,res)=>{//REST FOR POST (SEND INFORMATION)
-  res.send('Hola')
+  const id =  Math.floor(Math.random() * (10000 - 1) +1)
+  const body = req.body
+  if (!body.name || !body.number) {
+    return res.status(404).json({Error:'Fatal error: number or name is missing'})
+  }
+
+  const people = {
+    id:id,
+    name:body.name,
+    number:body.number
+  }
+  persons = persons.concat(people);
+  res.json(persons)
 })
 
 // here update
 
-app.use(express.json());
 app.delete(`/api/persons/:id`,(req,res)=>{
   const id = Number(req.params.id);
-  persons = persons.filter(people => people.id !== id)
-  res.status(204).end()
+  persons = persons.filter(people => people.id !== id);
+  res.status(204).end();
 })
 
 app.listen(PORT,()=>{
