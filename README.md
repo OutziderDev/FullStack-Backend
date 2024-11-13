@@ -16,5 +16,6 @@ con diferentes tecnologias y herramientas.
 
 ## Part  - B
 - 3.9 Backend Phonebook (paso 9: Integrando el backend desarrollado con el Frontend react de capitulos anteriores de manera local)
-- //3.10 Backend Phonebook (paso 10: Desplegando en Render.com  un webservice donde se encuentra el backend)
+- 3.10 Backend Phonebook (paso 10: Desplegando en Render.com  un webservice donde se encuentra el backend)
 - //3.11 Backend Phonebook (paso 11: Generando una build para el despliegue en formato SPA en Render.com)
+- link to view the webservice [Phonebook](https://phonebook-mpsk.onrender.com/)
