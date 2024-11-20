@@ -22,3 +22,5 @@ con diferentes tecnologias y herramientas.
 
 ## Part - C
 - 3.12 Database Phonebook (Creando la base de datos en MongoDB Atlas y vincular con mongoose, uso de Select e Insert)
+- 3.13 Database Phonebook (Trayendo toda la informacion de la base de datos a la API)
+- 3.14 Database Phonebook (Modificando el POST de la API para poder enviar los datos correctos a la BD y actualizar componentes)

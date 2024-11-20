@@ -39,7 +39,7 @@ let persons = [
     }
 ]
 //Funciones y presentacion
-app.get('/',(req,res)=>{
+app.get('/api',(req,res)=>{
   const presentation =`
     <h1>Rest Persons</h1>
     <p>Get information about persons via a RESTful API</p>
@@ -53,7 +53,7 @@ app.get('/',(req,res)=>{
     res.send(presentation);
 })
 
-app.get('/info',(req,res)=>{
+app.get('/info',(req,res)=>{// Information of total people and date
   Person.find({}).then(resp=> { 
     const  totalpersons  =  resp.length
   
@@ -77,7 +77,6 @@ app.get('/api/persons',(req,res)=>{ //Selecciona todo
   Person.find({}).then(result => {
     res.json(result)
   })
-  //res.json(persons)
 })
 
 app.get('/api/persons/:id',(req,res)=>{//REST for  search only 1 person
@@ -87,25 +86,20 @@ app.get('/api/persons/:id',(req,res)=>{//REST for  search only 1 person
 }) 
 
 app.post('/api/persons',(req,res)=>{//REST FOR POST (SEND INFORMATION)
-  const id =  Math.floor(Math.random() * (10000 - 1) +1)
   const body = req.body
-
-  //const duplicate = persons.find(p => p.name === body.name) ? console.log('si esta') : console.log('no esta')
 
   if (!body.name || !body.number) {
     return res.status(404).json({Error:'Fatal error: number or name is missing'})
   }
 
-  if (persons.find(p => p.name === body.name)) {
-    return res.status(409).json({Error: "name must be unique"})
-  }
-  const people = {
-    id:id,
+  const people = new Person({
     name:body.name,
     number:body.number
-  }
-  persons = persons.concat(people);
-  res.status(201).json(persons)
+  })
+
+  people.save().then(resp => {
+    res.status(201).json(resp)
+  })
 })
 
 // here update
