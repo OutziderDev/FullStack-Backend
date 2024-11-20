@@ -1,7 +1,9 @@
+require('dotenv').config()
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT 
 const cors = require('cors');
+const Person = require('./models/person')
 app.use(cors())
 app.use(express.json());
 app.use(express.static('dist'));
@@ -33,7 +35,7 @@ let persons = [
     { 
       id: 5,
       name: "Mary Cuie", 
-      number: "83-43-127023"
+      number: "83-43-127093"
     }
 ]
 //Funciones y presentacion
@@ -52,24 +54,30 @@ app.get('/',(req,res)=>{
 })
 
 app.get('/info',(req,res)=>{
-  const totalpersons = persons.length
-  const currentDate = new Date;
+  Person.find({}).then(resp=> { 
+    const  totalpersons  =  resp.length
+  
+    const currentDate = new Date;
+    const information = `
+    <div>
+      <p>Phonebook has info for ${totalpersons} people</p>
+      <p>${currentDate}</p>
 
-  const information = `
-  <div>
-    <p>Phonebook has info for ${totalpersons} people</p>
-    <p>${currentDate}</p>
+      <br><br><br>
+      <a href="/" > ← Back </a>
+    </div>
+    `;
+    res.send(information)
+  })
 
-    <br><br><br>
-    <a href="/" > ← Back </a>
-  </div>
-  `;
-  res.send(information)
 })
 
 //API REST
 app.get('/api/persons',(req,res)=>{ //Selecciona todo
-  res.json(persons)
+  Person.find({}).then(result => {
+    res.json(result)
+  })
+  //res.json(persons)
 })
 
 app.get('/api/persons/:id',(req,res)=>{//REST for  search only 1 person
