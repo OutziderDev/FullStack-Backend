@@ -6,7 +6,13 @@ const Person = require('./models/person')
 
 app.use(express.static('dist'));
 
-//algo
+const errorHandler = (error,request,response,next) => {
+  console.log(error.message);
+  if (error.name === 'CastError') {
+    return response.status(400).send({error:'malformatted id'})
+  }
+  next(error)
+}
 
 const cors = require('cors');
 app.use(cors())
@@ -80,13 +86,15 @@ app.get('/api/persons/:id',(req,res)=>{//REST for  search only 1 person
   people ? res.json(people) : res.status(404).json({Error:'People Mising'}) 
 }) 
 
-app.delete(`/api/persons/:id`,(req,res)=>{
+app.delete(`/api/persons/:id`,(req,res,next)=>{
   Person.findByIdAndDelete(req.params.id)
   .then(result =>{res.status(204).end();})
-  .catch(error => res.status(400).json({error: 'ID no encontrado'}))
+  .catch(error => next(error))
 })
 
 // here update
+
+app.use(errorHandler)
 
 const PORT = process.env.PORT 
 app.listen(PORT,()=>{
