@@ -1,43 +1,21 @@
-require('dotenv').config()
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT 
-const cors = require('cors');
+require('dotenv').config();
+
 const Person = require('./models/person')
+
+app.use(express.static('dist'));
+
+//algo
+
+const cors = require('cors');
 app.use(cors())
 app.use(express.json());
-app.use(express.static('dist'));
+
 const morgan = require('morgan');
 morgan.token('body', (req,res)=>{return JSON.stringify(req.body)})
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms, :body'));
 
-let persons = [
-    { 
-      id: 1,
-      name: "Arto Hellas", 
-      number: "040-123456"
-    },
-    { 
-      id: 2,
-      name: "Ada Lovelace", 
-      number: "39-44-5323523"
-    },
-    { 
-      id: 3,
-      name: "Dan Abramov", 
-      number: "12-43-234345"
-    },
-    { 
-      id: 4,
-      name: "Mary Poppendieck", 
-      number: "39-23-6423122"
-    },
-    { 
-      id: 5,
-      name: "Mary Cuie", 
-      number: "83-43-127093"
-    }
-]
 //Funciones y presentacion
 app.get('/api',(req,res)=>{
   const presentation =`
@@ -79,12 +57,6 @@ app.get('/api/persons',(req,res)=>{ //Selecciona todo
   })
 })
 
-app.get('/api/persons/:id',(req,res)=>{//REST for  search only 1 person
-  const id = Number(req.params.id)
-  const people = persons.find(p => p.id === id)
-  people ? res.json(people) : res.status(404).json({Error:'People Mising'}) 
-}) 
-
 app.post('/api/persons',(req,res)=>{//REST FOR POST (SEND INFORMATION)
   const body = req.body
 
@@ -102,14 +74,21 @@ app.post('/api/persons',(req,res)=>{//REST FOR POST (SEND INFORMATION)
   })
 })
 
-// here update
+app.get('/api/persons/:id',(req,res)=>{//REST for  search only 1 person
+  const id = Number(req.params.id)
+  const people = persons.find(p => p.id === id)
+  people ? res.json(people) : res.status(404).json({Error:'People Mising'}) 
+}) 
 
 app.delete(`/api/persons/:id`,(req,res)=>{
-  const id = Number(req.params.id);
-  persons = persons.filter(people => people.id !== id);
-  res.status(204).end();
+  Person.findByIdAndDelete(req.params.id)
+  .then(result =>{res.status(204).end();})
+  .catch(error => res.status(400).json({error: 'ID no encontrado'}))
 })
 
+// here update
+
+const PORT = process.env.PORT 
 app.listen(PORT,()=>{
     console.log(`Server running on port ${PORT} for exit pres CTRL + C` )
 })
