@@ -80,10 +80,16 @@ app.post('/api/persons',(req,res)=>{//REST FOR POST (SEND INFORMATION)
   })
 })
 
-app.get('/api/persons/:id',(req,res)=>{//REST for  search only 1 person
-  const id = Number(req.params.id)
-  const people = persons.find(p => p.id === id)
-  people ? res.json(people) : res.status(404).json({Error:'People Mising'}) 
+app.get('/api/persons/:id',(req,res,next)=>{//REST for  search only 1 person
+  Person.findById(req.params.id)
+  .then(resp => {
+    if (resp) {
+      res.json(resp)
+    }else{
+      res.status(404).end()
+    }
+  })
+  .catch(error => next(error))
 }) 
 
 app.delete(`/api/persons/:id`,(req,res,next)=>{
