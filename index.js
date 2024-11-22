@@ -7,9 +7,11 @@ const Person = require('./models/person')
 app.use(express.static('dist'));
 
 const errorHandler = (error,request,response,next) => {
-  console.log(error.message);
+  //console.log(error.message);
   if (error.name === 'CastError') {
     return response.status(400).send({error:'malformatted id'})
+  }else if(error.name === 'ValidationError'){
+    return response.status(400).send({error:error.message})
   }
   next(error)
 }
@@ -63,11 +65,11 @@ app.get('/api/persons',(req,res)=>{ //Selecciona todo
   })
 })
 
-app.post('/api/persons',(req,res)=>{//REST FOR POST (SEND INFORMATION)
+app.post('/api/persons',(req,res,next)=>{//REST FOR POST (SEND INFORMATION)
   const body = req.body
 
   if (!body.name || !body.number) {
-    return res.status(404).json({Error:'Fatal error: number or name is missing'})
+    return res.status(400).json({Error:'Fatal error: number or name is missing'})
   }
 
   const people = new Person({
@@ -78,6 +80,7 @@ app.post('/api/persons',(req,res)=>{//REST FOR POST (SEND INFORMATION)
   people.save().then(resp => {
     res.status(201).json(resp)
   })
+  .catch(error =>{next(error) })
 })
 
 app.get('/api/persons/:id',(req,res,next)=>{//REST for  search only 1 person
@@ -104,7 +107,7 @@ app.put('/api/persons/:id',(req,res,next)=>{
      name: data.name,
      number: data.number
   }
-  Person.findByIdAndUpdate(req.params.id,updatePeople,{new:true})
+  Person.findByIdAndUpdate(req.params.id,updatePeople,{new:true,runValidators:true})
   .then(result => {res.json(result)})
   .catch(error => next(error))
 })
