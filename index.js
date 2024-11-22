@@ -92,7 +92,16 @@ app.delete(`/api/persons/:id`,(req,res,next)=>{
   .catch(error => next(error))
 })
 
-// here update
+app.put('/api/persons/:id',(req,res,next)=>{
+  const data = req.body
+  const updatePeople = {
+     name: data.name,
+     number: data.number
+  }
+  Person.findByIdAndUpdate(req.params.id,updatePeople,{new:true})
+  .then(result => {res.json(result)})
+  .catch(error => next(error))
+})
 
 app.use(errorHandler)
 
