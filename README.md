@@ -33,4 +33,5 @@ con diferentes tecnologias y herramientas.
 - 3.19 Database Phonebook (paso 7: Aplicando validaciones de Mongoose para los datos captados en el Frontend)
 - 3.20 Database Phonebook (paso 8: Creando una validacion personalizada de Mongoose para agregar los numeros de las personas)
 - 3.21 Deploy Phonebook (Desplegando el backend con BD de Phonebook a produccion, actualizacion de carpeta Dist con la nueva Build)
+- 3.22 Eslint Phonebook (Agregando ESlint al proyecto para agregar las reglas que me permitan solucionar todos los errores y advertencias)
 - link of PhonebookAPP [Phonebook](https://phonebook-mpsk.onrender.com/)

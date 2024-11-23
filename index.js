@@ -21,11 +21,11 @@ app.use(cors())
 app.use(express.json());
 
 const morgan = require('morgan');
-morgan.token('body', (req,res)=>{return JSON.stringify(req.body)})
+morgan.token('body', (req) => {return JSON.stringify(req.body)})
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms, :body'));
 
 //Funciones y presentacion
-app.get('/api',(req,res)=>{
+app.get('/api',(req,res) => {
   const presentation =`
     <h1>Rest Persons</h1>
     <p>Get information about persons via a RESTful API</p>
@@ -39,10 +39,9 @@ app.get('/api',(req,res)=>{
     res.send(presentation);
 })
 
-app.get('/info',(req,res)=>{// Information of total people and date
-  Person.find({}).then(resp=> { 
+app.get('/info',(req,res) => {// Information of total people and date
+  Person.find({}).then(resp => {
     const  totalpersons  =  resp.length
-  
     const currentDate = new Date;
     const information = `
     <div>
@@ -55,17 +54,16 @@ app.get('/info',(req,res)=>{// Information of total people and date
     `;
     res.send(information)
   })
-
 })
 
 //API REST
-app.get('/api/persons',(req,res)=>{ //Selecciona todo
+app.get('/api/persons',(req,res) => { //Selecciona todo
   Person.find({}).then(result => {
     res.json(result)
   })
 })
 
-app.post('/api/persons',(req,res,next)=>{//REST FOR POST (SEND INFORMATION)
+app.post('/api/persons',(req,res,next) => {//REST FOR POST (SEND INFORMATION)
   const body = req.body
 
   if (!body.name || !body.number) {
@@ -80,10 +78,10 @@ app.post('/api/persons',(req,res,next)=>{//REST FOR POST (SEND INFORMATION)
   people.save().then(resp => {
     res.status(201).json(resp)
   })
-  .catch(error =>{next(error) })
+  .catch(error => {next(error) })
 })
 
-app.get('/api/persons/:id',(req,res,next)=>{//REST for  search only 1 person
+app.get('/api/persons/:id',(req,res,next) => {//REST for  search only 1 person
   Person.findById(req.params.id)
   .then(resp => {
     if (resp) {
@@ -93,15 +91,15 @@ app.get('/api/persons/:id',(req,res,next)=>{//REST for  search only 1 person
     }
   })
   .catch(error => next(error))
-}) 
+})
 
-app.delete(`/api/persons/:id`,(req,res,next)=>{
+app.delete(`/api/persons/:id`,(req,res,next) => {
   Person.findByIdAndDelete(req.params.id)
-  .then(result =>{res.status(204).end();})
+  .then(() => {res.status(204).end();})
   .catch(error => next(error))
 })
 
-app.put('/api/persons/:id',(req,res,next)=>{
+app.put('/api/persons/:id',(req,res,next) => {
   const data = req.body
   const updatePeople = {
      name: data.name,
@@ -114,7 +112,7 @@ app.put('/api/persons/:id',(req,res,next)=>{
 
 app.use(errorHandler)
 
-const PORT = process.env.PORT 
-app.listen(PORT,()=>{
-    console.log(`Server running on port ${PORT} for exit pres CTRL + C` )
-})
+const PORT = process.env.PORT
+app.listen(PORT,() => {
+  console.log(`Server running on port ${PORT} for exit pres CTRL + C`
+  )})

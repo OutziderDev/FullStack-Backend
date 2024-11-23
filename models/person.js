@@ -4,12 +4,11 @@ mongoose.set('strictQuery',false)
 const url = process.env.MONGODB_URL
 
 mongoose.connect(url)
-    .then(result =>{
+    .then(() => {
         console.log('Connected to MongoDB');
     })
     .catch(error => {
         console.error('error connecting to MongoDB',error);
-        
     })
 
 const personSchema = new mongoose.Schema({
@@ -31,7 +30,7 @@ const personSchema = new mongoose.Schema({
 })
 
 personSchema.set('toJSON',{
-    transform: (document,returnedObject) =>{
+    transform: (document,returnedObject) => {
         returnedObject.id = returnedObject._id.toString()
         delete returnedObject._id
         delete returnedObject.__v
