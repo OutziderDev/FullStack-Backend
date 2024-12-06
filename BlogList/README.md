@@ -16,3 +16,4 @@ con diferentes tecnologias y herramientas.
 ## Part 4 - B
 - 4.8 Blog List Tests (paso 1: Configurando el entorno de pruebas y utilizando la librerias Supertest para probar la api backend)
 - 4.9 Blog List Tests (paso 2: Creando una prueba para verificar que los nombre de las propiedades sean correctas )
+- 4.10 Blog List Tests (paso 3: Estableciendo una prueba a la ruta Post y verificando que se guarda y el total en la BD aumenta)

@@ -36,7 +36,25 @@ describe('Blog_api_Tests',  () => {
       assert.strictEqual(blog.id !== undefined,true)
       assert.strictEqual(blog._id, undefined)
     })
+  })
 
+
+  test('chek Post route and count in BD', async () => {
+    const addblog = {
+      title: 'Geografia',
+      author: 'Alejando Magno',
+      url: 'Elmagnanimo@gmail.com',
+      likes: 490
+    }
+
+    await blog_api
+      .post('/api/blogs')
+      .send(addblog)
+      .expect(201)
+      .expect('Content-Type', /application\/json/)
+
+    const blogsTotal = await helper.BlogInDB()
+    assert.strictEqual(blogsTotal.length,helper.initialBlogs.length + 1)
   })
 
   after( async () => {
