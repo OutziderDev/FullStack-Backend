@@ -73,6 +73,31 @@ describe('Blog_api_Tests',  () => {
     assert.strictEqual(saveBlog.likes,0)
   })
 
+  test('blog without other props is not added', async () => {
+    const blogWithoutTitle = {
+      author: 'Carl Sagan',
+      url: 'cosmos@example.com',
+    }
+
+    const blogWithoutUrl = {
+      author: 'Carl Sagan',
+      title: 'Cosmos',
+    }
+
+    await blog_api
+      .post('/api/blogs')
+      .send(blogWithoutTitle)
+      .expect(400)
+
+    await blog_api
+      .post('/api/blogs')
+      .send(blogWithoutUrl)
+      .expect(400)
+
+    const countBdReally = await helper.BlogInDB()
+    assert.strictEqual(helper.initialBlogs.length,countBdReally.length)
+  })
+
   after( async () => {
     await mongoose.connection.close()
   })
