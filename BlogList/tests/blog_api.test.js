@@ -57,6 +57,22 @@ describe('Blog_api_Tests',  () => {
     assert.strictEqual(blogsTotal.length,helper.initialBlogs.length + 1)
   })
 
+  test('If likes is miss, prop 0 by default', async () => {
+    const addblogWithoutLikes = {
+      title: 'Blog de Quimica',
+      author: 'Marie Curi',
+      url: 'LosCurieteam@gmail.com'
+    }
+
+    const response = await blog_api
+      .post('/api/blogs')
+      .send(addblogWithoutLikes)
+      .expect(201)
+
+    const saveBlog = response.body
+    assert.strictEqual(saveBlog.likes,0)
+  })
+
   after( async () => {
     await mongoose.connection.close()
   })
