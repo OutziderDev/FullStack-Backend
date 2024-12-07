@@ -116,6 +116,24 @@ describe('Blog_api_Tests',  () => {
       assert.strictEqual(ids.includes(objToDelete.id), false, )
     })
   })
+
+  describe('Test 4.14 Update likes of Blogs', () => {
+    test('correctly change Likes in blogs post', async () => {
+
+      const totalBlogs = await helper.BlogInDB()
+      const selectBlog = totalBlogs[0]
+      //console.log('el seleccionado',selectBlog)
+      const updateLikes = { ...selectBlog, likes: selectBlog.likes + 1000 }
+
+      const response = await blog_api
+        .put(`/api/blogs/${selectBlog.id}`)
+        .send(updateLikes)
+        .expect(200)
+
+      assert.strictEqual(response.body.likes,selectBlog.likes + 1000)
+    })
+  })
+
   after( async () => {
     await mongoose.connection.close()
   })
