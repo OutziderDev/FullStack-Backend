@@ -98,6 +98,24 @@ describe('Blog_api_Tests',  () => {
     assert.strictEqual(helper.initialBlogs.length,countBdReally.length)
   })
 
+  describe('4.13 for delete Test', () => {
+    test('Test for delete unique obj in BD', async () => {
+      const blogsBefore = await helper.BlogInDB()
+      //console.log('blogbefore',blogsBefore)
+      const objToDelete = blogsBefore[0]
+      //console.log('objtodelete',objToDelete)
+
+      await blog_api
+        .delete(`/api/blogs/${objToDelete.id}`)
+        .expect(204)
+
+      const blogsAfter = await helper.BlogInDB()
+      assert.strictEqual(blogsAfter.length, blogsBefore.length - 1  )
+
+      const ids = blogsAfter.map(blog => blog.id)
+      assert.strictEqual(ids.includes(objToDelete.id), false, )
+    })
+  })
   after( async () => {
     await mongoose.connection.close()
   })
