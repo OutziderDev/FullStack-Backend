@@ -3,6 +3,7 @@ require('express-async-errors')
 const app = express()
 const cors = require('cors')
 const blogRouter = require('./controllers/blogController')
+const userRouter = require('./controllers/usersController')
 const config = require('./utils/Config')
 const logger = require('./utils/Logger')
 const mongoose = require('mongoose')
@@ -20,5 +21,6 @@ mongoose.connect(config.MONGO_URL)
 
 //Routes
 app.use('/api/blogs',blogRouter)
+app.use('/api/users',userRouter)
 
 module.exports = app

@@ -17,3 +17,10 @@ con diferentes tecnologias y herramientas.
 - 4.8 Blog List Tests (paso 1: Configurando el entorno de pruebas y utilizando la librerias Supertest para probar la api backend)
 - 4.9 Blog List Tests (paso 2: Creando una prueba para verificar que los nombre de las propiedades sean correctas )
 - 4.10 Blog List Tests (paso 3: Estableciendo una prueba a la ruta Post y verificando que se guarda y el total en la BD aumenta)
+- 4.11 Blog List Tests (paso 4: Creando un test para verificar si la propiedad <Likes> estan todas incluida o por defecto se asigna 0)
+- 4.12 Blog List Tests (paso 5: Implementando las validaciones y el test para comprobar si las propiedades title o url estan incluidas)
+- 4.13 Blog List Test Expansion (paso 1: Creando la ruta .Delete y su correspondiente test en la API)
+- 4.14 Blog List Test Expansion (paso 2: Implementando la ruta .Put para poder modificar los blos y creando el Test para modificar los likes)
+
+## Part 4 - D
+- 4.15 Blog List Expansion (paso 3: Programando las rutas y modelos para la integracion de usuarios del sistema) 
