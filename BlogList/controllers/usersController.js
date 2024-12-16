@@ -9,7 +9,9 @@ userRouter.get('/', async (request, response) => {
 
 userRouter.post('/', async (request,response) => {
   const { username, name, password } = request.body
-
+  /* console.log('username', username )
+  console.log('name',name )
+  console.log('pass',password ) */
   if (!username || !password ) {
     return response.status(400).json({ error: 'Missing password or username' })
   }
@@ -17,7 +19,7 @@ userRouter.post('/', async (request,response) => {
     return response.status(400).json({ error:'User validation failed: username: Path `password` is shorter than the minimum allowed length (3).' })
   }
   const passwordHash = await bcrypt.hash(password,10)
-
+  //console.log('has', passwordHash )
   const newUser = new User({
     username,
     name,
