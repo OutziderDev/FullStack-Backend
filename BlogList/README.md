@@ -27,3 +27,6 @@ con diferentes tecnologias y herramientas.
 - 4.16 Blog List Expansion (paso 4: Estableciendo Validaciones y restricciones para controlar la creacion de usuarios y test)
 - 4.17 Blog List Expansion (paso 5: Expandiendo los blogs y usuarios para que muestren los datos completos aplicando <Populate>)
 - 4.18 Blog List Expansion (paso 6: Estableciendo la autentificacion basa en token en la ruta api/Login)
+- 4.19 Blog List Expansion (paso 7: Guardando los blogs mediante APi unicamente cuando tienen Token validos)
+- 4.20 Blog List Expansion (paso 8: Creando un middleware para manejar la extraccion de Tokens independiente y accecible a las rutas)
+- 4.21 Blog List Expansion (paso 9: Modificando la ruta <.Delete> para que los blogs sean borrados unicamente por sus propietarios)
