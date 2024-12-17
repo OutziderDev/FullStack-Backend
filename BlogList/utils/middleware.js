@@ -9,6 +9,13 @@ const errorHandler = (error,request,response,next) => {
     return response.status(400).json({ error:'The user exist, can be unique' })
   }
 
+  if (error.name === 'TokenExpiredError') {
+    return response.status(401).json({ error:'Token Expired' })
+  }
+
+  if (error.name === 'JsonWebTokenError') {
+    return response.status(401).json({ error: 'Token Invalid' })
+  }
   next(error)
 }
 

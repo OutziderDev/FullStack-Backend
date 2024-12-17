@@ -24,3 +24,6 @@ con diferentes tecnologias y herramientas.
 
 ## Part 4 - D
 - 4.15 Blog List Expansion (paso 3: Programando las rutas y modelos para la integracion de usuarios del sistema) 
+- 4.16 Blog List Expansion (paso 4: Estableciendo Validaciones y restricciones para controlar la creacion de usuarios y test)
+- 4.17 Blog List Expansion (paso 5: Expandiendo los blogs y usuarios para que muestren los datos completos aplicando <Populate>)
+- 4.18 Blog List Expansion (paso 6: Estableciendo la autentificacion basa en token en la ruta api/Login)
