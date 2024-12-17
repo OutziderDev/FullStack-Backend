@@ -4,14 +4,6 @@ const User = require('../models/usersModel')
 const jwt = require('jsonwebtoken')
 const secret = require('../utils/Config').SECRET
 
-const getTokenFrom = request => {
-  const authorization = request.get('authorization')
-  if (authorization && authorization.startsWith('Bearer ')) {
-    return authorization.replace('Bearer ', '')
-  }
-  return null
-}
-
 blogRouter.get('/', async (request, response) => {
   const blogs = await Blog.find({}).populate('user',{ username:1,name:1,id:1 })
   response.json(blogs)
@@ -24,7 +16,7 @@ blogRouter.post('/', async (request, response) => {
     return response.status(400).json({ error:'tittle or url are required' })
   }
 
-  const decodedToken = jwt.verify(getTokenFrom(request),secret)
+  const decodedToken = jwt.verify(request.token,secret)
   if (!decodedToken.id) {
     return response.status(401).json({ errors: 'Token Invalid' })
   }

@@ -21,11 +21,15 @@ mongoose.connect(config.MONGO_URL)
     logger.error('error',err)
   })
 
+//TokenExtractor
+app.use(middleware.tokenExtractor)
+
 //Routes
 app.use('/api/blogs',blogRouter)
 app.use('/api/users',userRouter)
 app.use('/api/login',loginRouter)
 
+//Errors
 app.use(middleware.errorHandler)
 
 module.exports = app
