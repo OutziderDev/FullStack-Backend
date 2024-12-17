@@ -4,6 +4,7 @@ const app = express()
 const cors = require('cors')
 const blogRouter = require('./controllers/blogController')
 const userRouter = require('./controllers/usersController')
+const loginRouter = require('./controllers/loginController')
 const config = require('./utils/Config')
 const logger = require('./utils/Logger')
 const middleware = require('./utils/middleware')
@@ -23,6 +24,7 @@ mongoose.connect(config.MONGO_URL)
 //Routes
 app.use('/api/blogs',blogRouter)
 app.use('/api/users',userRouter)
+app.use('/api/login',loginRouter)
 
 app.use(middleware.errorHandler)
 
