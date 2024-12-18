@@ -1,3 +1,6 @@
+const jwt = require('jsonwebtoken')
+const User = require('../models/usersModel')
+const secret = require('../utils/Config').SECRET
 
 const errorHandler = (error,request,response,next) => {
   //console.log('errorArray',error )
@@ -32,4 +35,20 @@ const tokenExtractor = (request,response,next) => {
   next()
 }
 
-module.exports = { errorHandler,tokenExtractor }
+const userExtractor = async (request,response,next) => {
+  const token = request.token
+
+  const decoded = jwt.verify(token,secret)
+  //console.log('decoded in middleware', decoded )
+  if (!decoded.id) {
+    return response.status(401).json({ error: 'Token invalid' })
+  }
+
+  const user = await User.findById(decoded.id)
+  //console.log('user in middleware',user )
+  request.user = user
+
+  next()
+}
+
+module.exports = { errorHandler,tokenExtractor,userExtractor }
