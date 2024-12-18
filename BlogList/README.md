@@ -30,3 +30,5 @@ con diferentes tecnologias y herramientas.
 - 4.19 Blog List Expansion (paso 7: Guardando los blogs mediante APi unicamente cuando tienen Token validos)
 - 4.20 Blog List Expansion (paso 8: Creando un middleware para manejar la extraccion de Tokens independiente y accecible a las rutas)
 - 4.21 Blog List Expansion (paso 9: Modificando la ruta <.Delete> para que los blogs sean borrados unicamente por sus propietarios)
+- 4.22 Blog List Expansion (paso 10: Creando el Middleware userExtractor, para obtener la informacion del usuario para las rutas de la API)
+- 4.23 Blog List Expansion (paso 11: Reparando los test creados anteriormente pero se dañaron al modificar los codigos)

@@ -12,7 +12,7 @@ blogRouter.get('/', async (request, response) => {
 
 blogRouter.post('/',middleware.userExtractor, async (request, response) => {
   const { title, url,author,likes } = request.body
-
+  //console.log('title',title )
   if(!title || !url){
     return response.status(400).json({ error:'tittle or url are required' })
   }
@@ -25,7 +25,7 @@ blogRouter.post('/',middleware.userExtractor, async (request, response) => {
   //console.log('decoded token', decodedToken )
   //const user = await User.findById(decodedToken.id)
   const user = request.user
-  console.log('usuario igual a el request user', user )
+  //console.log('usuario igual a el request user', user )
   //console.log('usuario',user )
   const blog = new Blog ({
     title,

@@ -24,7 +24,7 @@ const errorHandler = (error,request,response,next) => {
 
 const tokenExtractor = (request,response,next) => {
   const authorization = request.get('authorization')
-
+  //console.log('autorization is', authorization)
   if (authorization && authorization.startsWith('Bearer ')) {
     request.token = authorization.replace('Bearer ', '')
     //return authorization.replace('Bearer ', '')
@@ -37,17 +37,17 @@ const tokenExtractor = (request,response,next) => {
 
 const userExtractor = async (request,response,next) => {
   const token = request.token
-
+  //console.log('toten in middle', token)
   const decoded = jwt.verify(token,secret)
   //console.log('decoded in middleware', decoded )
   if (!decoded.id) {
     return response.status(401).json({ error: 'Token invalid' })
   }
-
+  //console.log('desde midleware el ID ->', decoded.id )
   const user = await User.findById(decoded.id)
   //console.log('user in middleware',user )
+  //console.log('el usuario despues de buscar',user )
   request.user = user
-
   next()
 }
 

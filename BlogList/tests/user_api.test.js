@@ -14,7 +14,7 @@ describe('Test for users', () => {
     await User.deleteMany({})
     const pass = '123'
     const passwordHash = await bcrypt.hash(pass,10)
-    const user = new User({ username:'mluukkai',name:'Matti Luukkainen', passwordHash:passwordHash })
+    const user = new User({ username:'pepe',name:'pepe test', passwordHash:passwordHash })
     await user.save()
   })
 
@@ -23,8 +23,8 @@ describe('Test for users', () => {
     //console.log('totalstar',userAtStart.length )
 
     const newUser = {
-      username: 'mluukkai',
-      name: 'Matti Luukkainen',
+      username: 'pepe',
+      name: 'pepe test',
       password: '123'
     }
     //console.log('newUser',newUser )
