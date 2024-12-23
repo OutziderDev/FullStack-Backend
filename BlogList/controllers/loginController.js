@@ -3,9 +3,9 @@ const jwt = require('jsonwebtoken')
 const bscrypt = require('bcryptjs')
 const User = require('../models/usersModel')
 
-loginRouter.get('/', async (request,response) => {
+/*loginRouter.get('/', async (request,response) => {
   response.json({ message:'in route' })
-})
+})*/
 
 loginRouter.post('/', async (request,response) => {
   const { username, password } = request.body
@@ -17,7 +17,7 @@ loginRouter.post('/', async (request,response) => {
     : await bscrypt.compare(password,userData.passwordHash)
 
   if (!(userData && correctPassword)) {
-    response.status(401).json({ erro: 'Invalid username or password' })
+    response.status(401).json({ error: 'Invalid username or password' })
   }
 
   const userForToken = {
