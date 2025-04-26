@@ -7,3 +7,4 @@ export type Patients = {
   occupation: string
 } 
 
+export type NonSensitivePatients = Omit<Patients, 'ssn'>;
