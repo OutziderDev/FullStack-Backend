@@ -8,3 +8,5 @@ export type Patients = {
 } 
 
 export type NonSensitivePatients = Omit<Patients, 'ssn'>;
+
+export type NewPatientType = Omit<Patients, 'id'>;

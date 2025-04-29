@@ -1,4 +1,4 @@
-import { Patients,NonSensitivePatients } from "../types/PatientsType";
+import { Patients,NonSensitivePatients, NewPatientType } from "../types/PatientsType";
 import dataPatients from "../data/patientsData";
 
 const getPatients = () : Patients[] => {
@@ -7,17 +7,12 @@ const getPatients = () : Patients[] => {
 
 const getNonSensitivePatients = () : NonSensitivePatients[] => {
  return dataPatients.map( ({id, name, dateOfBirth, gender, occupation}) => ({ id, name, dateOfBirth, gender, occupation}) );
-
 };
 
-const addPatient = ( name: string, dateOfBirth: string, gender: string, ssn: string, occupation:string): Patients => {
+const addPatient = ( patient: NewPatientType): Patients => {
   const newPatient = {
     id: crypto.randomUUID(),
-    name,
-    dateOfBirth,
-    gender,
-    ssn,
-    occupation
+    ...patient,
   };
 
   dataPatients.push(newPatient);
