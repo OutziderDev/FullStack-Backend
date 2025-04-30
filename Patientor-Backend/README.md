@@ -7,3 +7,7 @@ Repositorio donde se encuentran desarrollados los ejercicios de la parte 9, en l
 - 9.9  Patientor backend (paso 2: creando un fork del frontend especificado, se hace cambios necesarios para funcionar con la APi)
 - 9.10 Patientor backend (paso 3: creando el type Diangoses para asignarle a los datos de diagnostico, creando los servicios y endpoint)
 - 9.11 Patientor backend (paso 4: generando el type Patients con el type utility junto a un endpoint para servir datos seleccionados)
+- 9.12 Patientor backend (paso 5: implementando un endpoint para guardar pacientes via Post )
+- 9.13 Patientor backend (paso 6: validando los datos y creando guardia de tipos para recibir datos tipados del body de las request)
+
+## Part 9 - D
