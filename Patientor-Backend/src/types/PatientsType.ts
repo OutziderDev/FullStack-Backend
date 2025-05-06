@@ -2,12 +2,18 @@ export interface Entry {
 
 }
 
+export enum Gender {
+  Male = "male",
+  Female = "female",
+  Other = "other"
+}
+
 export interface Patients  {
   id: string;
   name: string;
   ssn?: string;
   occupation: string;
-  gender: string;
+  gender: Gender;
   dateOfBirth: string;
   entries: Entry[]
 } 

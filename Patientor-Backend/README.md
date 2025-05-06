@@ -10,4 +10,8 @@ Repositorio donde se encuentran desarrollados los ejercicios de la parte 9, en l
 - 9.12 Patientor backend (paso 5: implementando un endpoint para guardar pacientes via Post )
 - 9.13 Patientor backend (paso 6: validando los datos y creando guardia de tipos para recibir datos tipados del body de las request)
 
-## Part 9 - D
+## Part 9 - E
+#### Algunos de los ejercicios se encuentran desarrollados en la carpeta [patientor-frontend](https://github.com/OutziderDev/FullStack/tree/main/Part9/patientor)
+
+- 9.20 Patientor backend (paso 1: Creando un nuevo endpoint para buscar pacientes por ID y creando los tipos para nuevas entradas)
+- 9.21 *In* Patientor backend (paso 2: Creando nueva pestaña web para mostrar los datos de pacientes accediendo a ellos por la lista de pacientes)
