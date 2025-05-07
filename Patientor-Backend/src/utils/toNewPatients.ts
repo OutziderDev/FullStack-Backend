@@ -1,12 +1,12 @@
-import { NewPatientType } from "../types/PatientsType";
+import {  NewPatientType } from "../types/PatientsType";
 
 export const toNewPatients = (object:any): NewPatientType => {
   const newPatient: NewPatientType = {
     name: parseName(object.name),
     dateOfBirth: parseDate(object.dateOfBirth),
     ssn: parseSsn(object.ssn),
-    gender: parseGender(object.gender),
     occupation: parseOccupation(object.occupation),
+    ...object
   };
   
   return newPatient;
@@ -42,12 +42,12 @@ const parseSsn = (ssn: unknown): string => {
   return ssn;
 };
 
-const parseGender = (gender: unknown):string => {
+/* const parseGender = (gender: Gender):Gender => {
   if(!gender || !isString(gender)){
     throw new Error('Incorrect or missing gender: '+ gender);
   }
   return gender;
-};
+}; */
 
 const parseOccupation = (occupation: unknown): string => {
   if (!occupation || !isString(occupation)) {

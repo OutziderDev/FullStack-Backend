@@ -1,11 +1,9 @@
-export interface Entry {
-
-}
+import { Entry } from "./EntryTypes";
 
 export enum Gender {
-  Male = "male",
-  Female = "female",
-  Other = "other"
+  "Male" = "male",
+  "Female" = "female",
+  "Other" = "other"
 }
 
 export interface Patients  {
