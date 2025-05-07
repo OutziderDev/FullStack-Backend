@@ -1,5 +1,7 @@
 import { Diagnoses } from "./DiagnosesType";
 
+export type Entry = HealthCheckEntry | OccupationalHealthcareEntry | HospitalEntry
+
 export interface BaseEntry {
   id: string;
   description: string;
@@ -23,8 +25,6 @@ export interface HospitalEntry extends BaseEntry {
   type: "Hospital";
   discharge: Discharge;
 }
-
-export type Entry = HealthCheckEntry | OccupationalHealthcareEntry | HospitalEntry
 
 /* Enums Complementarios */
 export enum HealthCheckRating {

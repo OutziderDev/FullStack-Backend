@@ -15,3 +15,4 @@ Repositorio donde se encuentran desarrollados los ejercicios de la parte 9, en l
 
 - 9.20 Patientor backend (paso 1: Creando un nuevo endpoint para buscar pacientes por ID y creando los tipos para nuevas entradas)
 - 9.21 *In* Patientor backend (paso 2: Creando nueva pestaña web para mostrar los datos de pacientes accediendo a ellos por la lista de pacientes)
+- 9.22 Patientor Backend (paso 3: Desglosando el tipado dedatos con extends para multiples tiposde entradas para los pacientes y devolver los datos con el endpoint )
